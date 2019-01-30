@@ -1,7 +1,7 @@
 # The Word Guess Game
 #### A hangman-style guessing game!
 
-##About
+## About
 This application runs in the browser and features dynamically updated HTML and CSS powered by JavaScript.
 
 The app randomly selects a word out of an established array and listens for key events representing the user's chosen letter. 
