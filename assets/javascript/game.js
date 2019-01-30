@@ -33,16 +33,16 @@ function beginGame() {
     bikeWord.push("_ "); //for each individual letter the underscore will push to the html, depending on the random word that was chosen
     }
 
-    updateDisplay();
 };
 
+//pushes to html with updated content
 function updateDisplay() {
 
     document.getElementById("wins").innerHTML = wins;
     document.getElementById("currentWord").innerHTML = "";
 
     for (var i = 0; i < bikeWord.length; i++) {
-        document.getElementById("currentWord").innerHTML+= bikeWord[i]; //'+=' is the same at x = x + y
+        document.getElementById("currentWord").innerHTML += bikeWord[i]; //'+=' is the same at x = x + y; has to be there in order for _ _ _ to track appropriately
     }
     document.getElementById("remainingGuesses").innerHTML = remainingGuesses;
     document.getElementById("lettersGuessed").innerHTML = lettersGuessed; 
@@ -54,15 +54,21 @@ function updateDisplay() {
     if(remainingGuesses <= 0) {
         gameHasEnded = true;
     }
+
+    if(gameHasEnded) {
+        alert("Game Over! Want to play again?");
+    }
+    
+    updateDisplay()
 };
 
 document.onkeyup = function(event) { //getting the game to begin (again)
     if(gameHasEnded) {
-        beginGame()
+        beginGame(); //to html -- check this
         gameHasEnded = false;
     }
     else {
-        if (event.keyCode >= 65 && event.keyCode <= 90) { //only the letters keys will be enables since their keycode is between 65 & 90
+        if (event.keyCode >= 65 && event.keyCode <= 90) { //only the letters keys will be enabled since their keycode is between 65 & 90
             makeGuess(event.key.toLowerCase()); //will return uppercase letters to lowercase submissions
         }
     }
@@ -100,9 +106,12 @@ function evaluateGuess(letter) {
     }
 };
 
+
 function checkWin() {
-    if(bikeWord.indexOf("_") === -1) {
+    if(bikeWord.indexOf("_ ") === -1) {
         wins++;
         gameHasEnded = true;
     }
 };
+
+//alert the user whether they have won or lost
